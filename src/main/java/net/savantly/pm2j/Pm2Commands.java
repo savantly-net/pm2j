@@ -5,4 +5,5 @@ public class Pm2Commands {
 	static final String KILL = "kill";
 	static final String STOP = "stop";
 	static final String PRETTY_LIST = "prettylist";
+	static final String STATUS = "prettylist";
 }

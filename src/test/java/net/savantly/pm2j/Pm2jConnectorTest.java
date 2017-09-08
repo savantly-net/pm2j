@@ -13,7 +13,7 @@ public class Pm2jConnectorTest {
 	
 	Logger log = LogManager.getLogger(Pm2jConnectorTest.class);
 
-	private static Pm2jConnector connector = new Pm2jConnector();
+	private static Pm2Connector connector = new Pm2Connector();
 	private String configFile = "./src/test/resources/ecosystem.json";
 	
 	@AfterClass

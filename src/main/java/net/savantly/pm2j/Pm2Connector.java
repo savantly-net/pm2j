@@ -14,9 +14,9 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Pm2jConnector {
+public class Pm2Connector {
 	
-	private final static Logger log = LogManager.getLogger(Pm2jConnector.class);
+	private final static Logger log = LogManager.getLogger(Pm2Connector.class);
 	private static ObjectMapper objectMapper = new ObjectMapper();
 	static{
 		objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
@@ -27,17 +27,17 @@ public class Pm2jConnector {
 	private String pm2Path;
 	private String pm2Home;
 	
-	public Pm2jConnector() {
+	public Pm2Connector() {
 		this.pm2Path = Pm2Locator.getBinaryLocationFromPath("pm2");
 		this.pm2Home = Pm2Locator.getPm2Home();
 	}
 	
-	public Pm2jConnector(String pm2Path) {
+	public Pm2Connector(String pm2Path) {
 		this.pm2Path = pm2Path;
-		this.pm2Home = Pm2Locator.getPm2Home();;
+		this.pm2Home = Pm2Locator.getPm2Home();
 	}
 	
-	public Pm2jConnector(String pm2Path, String pm2Home) {
+	public Pm2Connector(String pm2Path, String pm2Home) {
 		this.pm2Path = pm2Path;
 		this.pm2Home = pm2Home;
 	}
@@ -54,8 +54,16 @@ public class Pm2jConnector {
 		executePm2Command(STOP, "all");
 	}
 	
+	public boolean ensureRunning(){
+		//File pm2Pid = new File(Paths.get(pm2Home, "pm2.pid").toString());
+		executePm2Command(STATUS);
+		return true;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Pm2ProcessInfo> getPm2Processes(){
+		if(!ensureRunning()) throw new RuntimeException("pm2 is not running");
+		
 		String json = executePm2Command(PRETTY_LIST);
 		List<Pm2ProcessInfo> pm2Processes = new ArrayList<Pm2ProcessInfo>();
 		try {
@@ -64,6 +72,18 @@ public class Pm2jConnector {
 			log.error(ex);
 		}
 		return pm2Processes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Pm2ProcessInfo getPm2Processes(int id){
+		List<Pm2ProcessInfo> pm2Processes = getPm2Processes();
+		for (Pm2ProcessInfo pm2ProcessInfo : pm2Processes) {
+			if(pm2ProcessInfo.getPm_id() == id){
+				return pm2ProcessInfo;
+			}
+		}
+		// Didnt find a matching process id
+		return null;
 	}
 
 
