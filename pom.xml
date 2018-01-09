@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>pm2j</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>pm2jsprout-spring-boot-starter</name>
+	<version>1.0.0-RELEASE</version>
+	<name>pm2j</name>
 	<description>Control a pm2 process</description>
 	<scm>
 		<url>https://github.com/savantly-net/pm2j</url>
