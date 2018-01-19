@@ -6,4 +6,6 @@ public class Pm2Commands {
 	static final String STOP = "stop";
 	static final String PRETTY_LIST = "prettylist";
 	static final String STATUS = "prettylist";
+	static final String SHOW = "show";
+	static final String LOGS = "logs";
 }

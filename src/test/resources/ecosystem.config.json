@@ -1,8 +1,10 @@
 {
   apps : [{
     name        : "single",
+    cwd			: "src/test/resources",
     script      : "./app/app.js",
     watch       : true,
+    autorestart : false,
     env: {
       "NODE_ENV": "development",
       "PORT"	: 5679
@@ -12,9 +14,11 @@
     }
   },{
     name       : "cluster",
+    cwd			: "src/test/resources",
     script     : "./app/app.js",
     instances  : 2,
     exec_mode  : "cluster",
+    autorestart : false,
     env: {
         "NODE_ENV": "development",
         "PORT"	: 5680

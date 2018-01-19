@@ -1,6 +1,7 @@
 package net.savantly.pm2j;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.joda.time.DateTime;
@@ -13,9 +14,9 @@ public class Pm2EnvInfo {
 	private boolean automation;
 	private boolean autorestart;
 	private boolean treekill;
-	private Map<String, String> env = new HashMap<>();
+	private Map<String, Object> env = new HashMap<>();
 	private Pm2ProcessMode exec_mode;
-	private String[] node_args;
+	private List<String> node_args;
 	private Pm2ProcessStatus status;
 	private long pm_uptime;
 	private DateTime created_at;
@@ -66,10 +67,10 @@ public class Pm2EnvInfo {
 	public void setTreekill(boolean treekill) {
 		this.treekill = treekill;
 	}
-	public Map<String, String> getEnv() {
+	public Map<String, Object> getEnv() {
 		return env;
 	}
-	public void setEnv(Map<String, String> env) {
+	public void setEnv(Map<String, Object> env) {
 		this.env = env;
 	}
 	public Pm2ProcessMode getExec_mode() {
@@ -78,10 +79,10 @@ public class Pm2EnvInfo {
 	public void setExec_mode(Pm2ProcessMode exec_mode) {
 		this.exec_mode = exec_mode;
 	}
-	public String[] getNode_args() {
+	public List<String> getNode_args() {
 		return node_args;
 	}
-	public void setNode_args(String[] node_args) {
+	public void setNode_args(List<String> node_args) {
 		this.node_args = node_args;
 	}
 	public Pm2ProcessStatus getStatus() {

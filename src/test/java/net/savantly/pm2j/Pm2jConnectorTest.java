@@ -14,7 +14,7 @@ public class Pm2jConnectorTest {
 	Logger log = LogManager.getLogger(Pm2jConnectorTest.class);
 
 	private static Pm2Connector connector = new Pm2Connector();
-	private String configFile = "./src/test/resources/ecosystem.json";
+	private String configFile = "src/test/resources/ecosystem.config.json";
 	
 	@AfterClass
 	public static void after(){
@@ -30,6 +30,13 @@ public class Pm2jConnectorTest {
 	public void getPm2ProcessesTest(){
 		List<Pm2ProcessInfo> pm2Processes = connector.getPm2Processes();
 		Assert.assertNotNull(pm2Processes);
+	}
+	
+	// @Test
+	// TODO: Need to do this without hanging the thread indefinitely
+	public void getLogTailTest(){
+		String response = connector.getlogTail("0", 1);
+		Assert.assertNotNull(response);
 	}
 	
 	@Test
